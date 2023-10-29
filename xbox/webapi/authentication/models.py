@@ -143,7 +143,7 @@ class TitleEndpoint(PascalCaseModel):
     server_cert_index: Optional[List[int]]
 
 
-class SignaturePolicy(PascalCaseModel):
+class SignaturePolicy(BaseModel):
     version: int
     supported_algorithms: List[str]
     max_body_bytes: int

@@ -20,20 +20,18 @@ from xbox.webapi.api.provider.lists import ListsProvider
 from xbox.webapi.api.provider.mediahub import MediahubProvider
 from xbox.webapi.api.provider.message import MessageProvider
 from xbox.webapi.api.provider.people import PeopleProvider
-from xbox.webapi.api.provider.presence import PresenceProvider
 from xbox.webapi.api.provider.profile import ProfileProvider
 from xbox.webapi.api.provider.screenshots import ScreenshotsProvider
 from xbox.webapi.api.provider.smartglass import SmartglassProvider
 from xbox.webapi.api.provider.titlehub import TitlehubProvider
 from xbox.webapi.api.provider.usersearch import UserSearchProvider
 from xbox.webapi.api.provider.userstats import UserStatsProvider
-from xbox.webapi.authentication.manager import AuthenticationManager
 
 log = logging.getLogger("xbox.api")
 
 
 class Session:
-    def __init__(self, auth_mgr: AuthenticationManager):
+    def __init__(self, auth_mgr):
         self._auth_mgr = auth_mgr
         self._cv = CorrelationVector()
 
@@ -107,7 +105,7 @@ class Session:
 class XboxLiveClient:
     def __init__(
         self,
-        auth_mgr: AuthenticationManager,
+        auth_mgr,
         language: XboxLiveLanguage = DefaultXboxLiveLanguages.United_States,
     ):
         self._auth_mgr = auth_mgr
@@ -121,7 +119,6 @@ class XboxLiveClient:
         self.usersearch = UserSearchProvider(self)
         self.gameclips = GameclipProvider(self)
         self.people = PeopleProvider(self)
-        self.presence = PresenceProvider(self)
         self.mediahub = MediahubProvider(self)
         self.message = MessageProvider(self)
         self.userstats = UserStatsProvider(self)

@@ -1,4 +1,5 @@
 import asyncio
+import os.path
 import sys
 
 from httpx import HTTPStatusError
@@ -14,9 +15,9 @@ This uses the global default client identification by OpenXbox
 You can supply your own parameters here if you are permitted to create
 new Microsoft OAuth Apps and know what you are doing
 """
-client_id = CLIENT_ID
-client_secret = CLIENT_SECRET
-tokens_file = TOKENS_FILE
+client_id = "7cc88370-21c2-43c6-bf9d-06f224740c0a"
+client_secret = "o.A8Q~_b-5KDCxiSyvAxc59-qsjsTk~KztXwac5y"
+tokens_file = "D:\\Coding\\valheim_synchronizer\\xbox_tokens.json"
 
 """
 For doing authentication, see xbox/webapi/scripts/authenticate.py
@@ -79,20 +80,6 @@ async def async_main():
         # Get friendslist
         friendslist = await xbl_client.people.get_friends_own()
         print(f"Your friends: {friendslist}\n")
-
-        # Get presence status (by list of XUID)
-        presence = await xbl_client.presence.get_presence_batch(
-            ["2533274794093122", "2533274807551369"]
-        )
-        print(f"Statuses of some random players by XUID: {presence}\n")
-
-        # Get messages
-        messages = await xbl_client.message.get_inbox()
-        print(f"Your messages: {messages}\n")
-
-        # Get profile by GT
-        profile = await xbl_client.profile.get_profile_by_gamertag("SomeGamertag")
-        print(f"Profile under SomeGamertag gamer tag: {profile}\n")
 
 
 asyncio.run(async_main())
